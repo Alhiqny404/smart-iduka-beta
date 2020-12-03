@@ -62,6 +62,6 @@ class DaftarPerusahaanController extends Controller
     	$user->assignRole('company');
 	    $user->profileCompany()->save(new profileCompany);
 
-	    return redirect()->route('home')->with('success','Pendaftaran telah berhasil');
+	    return redirect()->route('company')->with('success','Pendaftaran telah berhasil');
     }
 }
