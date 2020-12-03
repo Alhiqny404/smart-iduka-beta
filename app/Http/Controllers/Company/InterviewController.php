@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Interview;
 use App\Models\Pelamar;
+use App\Mail\JadwalInterview;
 
 class InterviewController extends Controller
 {
@@ -37,6 +38,10 @@ class InterviewController extends Controller
     	]);
 
         Pelamar::find($id)->update(['status' => 'process']);
+        
+        $profile = Profile::where('user_id',$request->user_id)->first()->email;
+        
+        \Mail::to($profile->email)->send(new JadwalInterview());
 
     	return redirect()->route('pelamar.index')->with('success','Berhasil Melakukan penjadwalan');
     }
